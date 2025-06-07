@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropertyCard from './PropertyCard';
 import { Button } from '@/components/ui/button';
 
@@ -105,8 +106,8 @@ const PropertiesSection = () => {
               onClick={() => setActiveFilter(filter.key)}
               variant={activeFilter === filter.key ? "default" : "outline"}
               className={activeFilter === filter.key 
-                ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
-                : "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                ? "bg-foreground hover:bg-foreground/90 text-background" 
+                : "border-foreground text-foreground hover:bg-foreground hover:text-background"
               }
             >
               {filter.label}
@@ -128,6 +129,18 @@ const PropertiesSection = () => {
             <p className="text-muted-foreground">Aucun bien ne correspond à ce filtre pour le moment.</p>
           </div>
         )}
+
+        {/* Lien vers tous les biens */}
+        <div className="text-center mt-12">
+          <Link to="/properties">
+            <Button 
+              size="lg"
+              className="bg-foreground hover:bg-foreground/90 text-background"
+            >
+              Voir tous nos biens
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );
