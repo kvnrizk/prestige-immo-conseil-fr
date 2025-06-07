@@ -27,13 +27,13 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             Mes services immobiliers
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Un accompagnement sur-mesure pour tous vos projets immobiliers, 
             de l'achat à la gestion locative en passant par la vente.
           </p>
@@ -41,13 +41,13 @@ const ServicesSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-shadow duration-300 border-gray-100">
+            <Card key={index} className="group hover:shadow-xl transition-shadow duration-300 border">
               <CardContent className="p-8 text-center space-y-4">
                 <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 group-hover:text-amber-600 transition-colors">
+                <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
               </CardContent>
