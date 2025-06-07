@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PropertyCard from './PropertyCard';
 import { Button } from '@/components/ui/button';
@@ -87,13 +86,13 @@ const PropertiesSection = () => {
   ];
 
   return (
-    <section id="biens" className="py-20 bg-white">
+    <section id="biens" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             Découvrez nos biens immobiliers
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Une sélection de biens de qualité, rigoureusement choisis pour répondre 
             à tous vos besoins immobiliers.
           </p>
@@ -106,8 +105,8 @@ const PropertiesSection = () => {
               onClick={() => setActiveFilter(filter.key)}
               variant={activeFilter === filter.key ? "default" : "outline"}
               className={activeFilter === filter.key 
-                ? "bg-amber-600 hover:bg-amber-700 text-white" 
-                : "border-amber-600 text-amber-600 hover:bg-amber-50"
+                ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
+                : "border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               }
             >
               {filter.label}
@@ -126,7 +125,7 @@ const PropertiesSection = () => {
 
         {filteredProperties.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500">Aucun bien ne correspond à ce filtre pour le moment.</p>
+            <p className="text-muted-foreground">Aucun bien ne correspond à ce filtre pour le moment.</p>
           </div>
         )}
       </div>

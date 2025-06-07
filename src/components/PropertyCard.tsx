@@ -29,13 +29,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'vente':
-        return 'bg-green-100 text-green-800';
+        return 'bg-secondary text-secondary-foreground';
       case 'location':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-muted text-muted-foreground';
       case 'saisonnier':
-        return 'bg-amber-100 text-amber-800';
+        return 'bg-primary text-primary-foreground';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-muted text-muted-foreground';
     }
   };
 
@@ -74,13 +74,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       
       <CardContent className="p-6 space-y-4">
         <div>
-          <h3 className="text-xl font-semibold text-gray-900 group-hover:text-amber-600 transition-colors">
+          <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
             {title}
           </h3>
-          <p className="text-gray-600">{location}</p>
+          <p className="text-muted-foreground">{location}</p>
         </div>
 
-        <div className="flex justify-between items-center text-sm text-gray-600">
+        <div className="flex justify-between items-center text-sm text-muted-foreground">
           {bedrooms && (
             <span>{bedrooms} chambre{bedrooms > 1 ? 's' : ''}</span>
           )}
@@ -89,17 +89,17 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           )}
         </div>
 
-        <p className="text-gray-600 text-sm line-clamp-2">
+        <p className="text-muted-foreground text-sm line-clamp-2">
           {description}
         </p>
 
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-amber-600">
+          <div className="text-2xl font-bold text-primary">
             {price}
           </div>
           <Button 
             onClick={handleContact}
-            className="bg-amber-600 hover:bg-amber-700 text-white"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             Contacter
           </Button>

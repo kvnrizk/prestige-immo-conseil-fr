@@ -19,15 +19,15 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="a-propos" className="py-20 bg-gray-50">
+    <section id="a-propos" className="py-20 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
                 Votre partenaire immobilier de confiance
               </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
                   Fort de plusieurs années d'expérience dans l'immobilier, j'ai développé 
                   une expertise complète du marché français. En tant qu'agent indépendant, 
@@ -51,8 +51,8 @@ const AboutSection = () => {
             <div className="grid sm:grid-cols-3 gap-6">
               {values.map((value, index) => (
                 <div key={index} className="text-center">
-                  <h3 className="font-semibold text-amber-600 mb-2">{value.title}</h3>
-                  <p className="text-sm text-gray-600">{value.description}</p>
+                  <h3 className="font-semibold text-primary mb-2">{value.title}</h3>
+                  <p className="text-sm text-muted-foreground">{value.description}</p>
                 </div>
               ))}
             </div>
@@ -68,7 +68,7 @@ const AboutSection = () => {
                 />
               </CardContent>
             </Card>
-            <div className="absolute -bottom-6 -right-6 bg-amber-600 text-white p-6 rounded-xl shadow-lg">
+            <div className="absolute -bottom-6 -right-6 bg-primary text-primary-foreground p-6 rounded-xl shadow-lg">
               <div className="text-center">
                 <div className="text-2xl font-bold">5+</div>
                 <div className="text-sm">Années d'expérience</div>
