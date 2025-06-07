@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +18,7 @@ interface PropertyCardProps {
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
+  id,
   title,
   price,
   location,
@@ -26,6 +28,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   bedrooms,
   area
 }) => {
+  const navigate = useNavigate();
+
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'vente':
@@ -52,15 +56,23 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     }
   };
 
-  const handleContact = () => {
+  const handleContact = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const element = document.getElementById('contact');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const handleViewDetails = () => {
+    navigate(`/property/${id}`);
+  };
+
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <Card 
+      className="group hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+      onClick={handleViewDetails}
+    >
       <div className="relative">
         <img
           src={image}
@@ -93,16 +105,27 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           {description}
         </p>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-3">
           <div className="text-2xl font-bold text-primary">
             {price}
           </div>
-          <Button 
-            onClick={handleContact}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
-          >
-            Contacter
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              onClick={handleContact}
+              variant="outline"
+              size="sm"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              Contacter
+            </Button>
+            <Button 
+              onClick={handleViewDetails}
+              size="sm"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            >
+              Voir plus
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
