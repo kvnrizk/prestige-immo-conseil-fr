@@ -9,20 +9,6 @@ const Navigation = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const scrollToSection = (sectionId: string) => {
-    if (location.pathname !== '/') {
-      // Si on n'est pas sur la page d'accueil, naviguer d'abord vers l'accueil
-      window.location.href = `/#${sectionId}`;
-      return;
-    }
-    
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
-
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,36 +22,24 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <button
-                onClick={() => scrollToSection('accueil')}
-                className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
-              >
-                Accueil
-              </button>
-              <button
-                onClick={() => scrollToSection('a-propos')}
-                className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
-              >
-                À propos
-              </button>
-              <button
-                onClick={() => scrollToSection('biens')}
-                className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
-              >
-                Biens immobiliers
-              </button>
               <Link
-                to="/properties"
+                to="/buying"
                 className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
               >
-                Tous nos biens
+                Achat
               </Link>
-              <button
-                onClick={() => scrollToSection('contact')}
+              <Link
+                to="/renting"
                 className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
               >
-                Contact
-              </button>
+                Location
+              </Link>
+              <Link
+                to="/short-term"
+                className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
+              >
+                Saisonnière
+              </Link>
             </div>
           </div>
 
@@ -84,37 +58,27 @@ const Navigation = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t">
-              <button
-                onClick={() => scrollToSection('accueil')}
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
-              >
-                Accueil
-              </button>
-              <button
-                onClick={() => scrollToSection('a-propos')}
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
-              >
-                À propos
-              </button>
-              <button
-                onClick={() => scrollToSection('biens')}
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
-              >
-                Biens immobiliers
-              </button>
               <Link
-                to="/properties"
+                to="/buying"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Tous nos biens
+                Achat
               </Link>
-              <button
-                onClick={() => scrollToSection('contact')}
+              <Link
+                to="/renting"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
-                Contact
-              </button>
+                Location
+              </Link>
+              <Link
+                to="/short-term"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Saisonnière
+              </Link>
             </div>
           </div>
         )}

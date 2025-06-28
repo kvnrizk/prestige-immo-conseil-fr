@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import PropertyDetails from "./pages/PropertyDetails";
 import AllProperties from "./pages/AllProperties";
+import BuyingPage from "./pages/BuyingPage";
+import RentingPage from "./pages/RentingPage";
+import ShortTermPage from "./pages/ShortTermPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +24,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/properties" element={<AllProperties />} />
+          <Route path="/buying" element={<BuyingPage />} />
+          <Route path="/renting" element={<RentingPage />} />
+          <Route path="/short-term" element={<ShortTermPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
