@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +7,6 @@ import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     nom: '',
@@ -17,19 +15,21 @@ const Contact = () => {
     typeProjet: '',
     message: ''
   });
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!formData.nom || !formData.email || !formData.message) {
       toast({
         title: "Erreur",
@@ -38,14 +38,11 @@ const Contact = () => {
       });
       return;
     }
-
     console.log('Données du formulaire:', formData);
-    
     toast({
       title: "Message envoyé !",
-      description: "Merci pour votre message. Je vous répondrai dans les plus brefs délais.",
+      description: "Merci pour votre message. Je vous répondrai dans les plus brefs délais."
     });
-
     setFormData({
       nom: '',
       email: '',
@@ -54,9 +51,7 @@ const Contact = () => {
       message: ''
     });
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navigation />
       
       {/* Hero Section */}
@@ -95,30 +90,13 @@ const Contact = () => {
                       <label htmlFor="nom" className="block text-sm font-medium text-foreground mb-2">
                         Nom complet *
                       </label>
-                      <Input
-                        id="nom"
-                        name="nom"
-                        type="text"
-                        value={formData.nom}
-                        onChange={handleInputChange}
-                        placeholder="Votre nom et prénom"
-                        className="h-12"
-                        required
-                      />
+                      <Input id="nom" name="nom" type="text" value={formData.nom} onChange={handleInputChange} placeholder="Votre nom et prénom" className="h-12" required />
                     </div>
                     <div>
                       <label htmlFor="telephone" className="block text-sm font-medium text-foreground mb-2">
                         Téléphone
                       </label>
-                      <Input
-                        id="telephone"
-                        name="telephone"
-                        type="tel"
-                        value={formData.telephone}
-                        onChange={handleInputChange}
-                        placeholder="+33 6 12 34 56 78"
-                        className="h-12"
-                      />
+                      <Input id="telephone" name="telephone" type="tel" value={formData.telephone} onChange={handleInputChange} placeholder="+33 6 12 34 56 78" className="h-12" />
                     </div>
                   </div>
 
@@ -126,29 +104,14 @@ const Contact = () => {
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email *
                     </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="votre.email@exemple.com"
-                      className="h-12"
-                      required
-                    />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="votre.email@exemple.com" className="h-12" required />
                   </div>
 
                   <div>
                     <label htmlFor="typeProjet" className="block text-sm font-medium text-foreground mb-2">
                       Type de projet
                     </label>
-                    <select
-                      id="typeProjet"
-                      name="typeProjet"
-                      value={formData.typeProjet}
-                      onChange={handleInputChange}
-                      className="w-full h-12 px-3 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                    >
+                    <select id="typeProjet" name="typeProjet" value={formData.typeProjet} onChange={handleInputChange} className="w-full h-12 px-3 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring">
                       <option value="">Sélectionnez votre projet</option>
                       <option value="achat">Achat immobilier</option>
                       <option value="vente">Vente immobilière</option>
@@ -163,22 +126,10 @@ const Contact = () => {
                     <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Votre message *
                     </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Décrivez votre projet, vos besoins, vos questions..."
-                      rows={6}
-                      className="resize-none"
-                      required
-                    />
+                    <Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} placeholder="Décrivez votre projet, vos besoins, vos questions..." rows={6} className="resize-none" required />
                   </div>
 
-                  <Button 
-                    type="submit"
-                    className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground text-lg font-medium flex items-center justify-center gap-2"
-                  >
+                  <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground text-lg font-medium flex items-center justify-center gap-2">
                     <Send size={20} />
                     Envoyer le message
                   </Button>
@@ -227,31 +178,13 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4 p-6 bg-muted rounded-xl">
-                    <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Horaires</h3>
-                      <p className="text-lg text-foreground font-medium">Lun - Dim : 8h - 20h</p>
-                      <p className="text-sm text-muted-foreground">Urgences 24h/24</p>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
 
               {/* CTA Card */}
               <Card className="bg-primary text-primary-foreground">
-                <CardContent className="p-8">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <MessageCircle className="w-8 h-8" />
-                    <h3 className="text-xl font-bold">Consultation gratuite</h3>
-                  </div>
-                  <p className="text-primary-foreground/90 leading-relaxed">
-                    Je vous offre un premier échange gratuit de 30 minutes pour analyser 
-                    votre projet et vous présenter mes services. Rencontrons-nous !
-                  </p>
-                </CardContent>
+                
               </Card>
             </div>
           </div>
@@ -259,8 +192,6 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
