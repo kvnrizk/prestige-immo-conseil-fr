@@ -20,21 +20,23 @@ const AboutSection = () => {
                 Votre partenaire immobilier de confiance
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p> je suis ravi de vous accompagner dans le monde de l'immobilier. Fort d'une solide formation et d'une passion grandissante pour ce secteur, je me lance aujourd'hui comme agent immobilier indépendant.
-
-
-
-
-J'ai la chance de collaborer étroitement avec une agence immobilière établie, ce qui me permet de bénéficier de leur expertise tout en construisant ma propre approche personnalisée.
-
-Ma mission est claire : vous offrir un accompagnement professionnel, transparent et bienveillant pour concrétiser vos projets immobiliers. Que vous soyez à la recherche de votre premier achat, que vous souhaitiez vendre votre bien, ou que vous envisagiez un investissement locatif, je mets toute mon énergie et ma détermination à votre service.
-
-
-
-
-Parce que chaque projet est unique, je prends le temps de comprendre vos besoins spécifiques et de vous guider pas à pas. Mon objectif est de faire de votre parcours immobilier une expérience sereine et réussie.</p>
-                
-                
+                <p>
+                  Fort de plusieurs années d'expérience dans l'immobilier, j'ai développé 
+                  une expertise complète du marché français. En tant qu'agent indépendant, 
+                  je travaille en étroite collaboration avec une agence immobilière reconnue 
+                  tout en développant mon propre réseau de clients.
+                </p>
+                <p>
+                  Ma mission est simple : vous accompagner avec professionnalisme et 
+                  bienveillance dans la concrétisation de vos projets immobiliers. 
+                  Que vous souhaitiez acheter, vendre ou investir, je mets mon expertise 
+                  et mon réseau à votre service.
+                </p>
+                <p>
+                  Chaque client est unique, c'est pourquoi j'adapte mon approche à vos 
+                  besoins spécifiques et vous accompagne personnellement à chaque étape 
+                  de votre projet.
+                </p>
               </div>
             </div>
 
