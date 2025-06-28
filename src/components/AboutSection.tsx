@@ -1,25 +1,17 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-
 const AboutSection = () => {
-  const values = [
-    {
-      title: "Intégrité",
-      description: "Transparence totale et honnêteté dans chaque transaction"
-    },
-    {
-      title: "Expertise",
-      description: "Connaissance approfondie du marché immobilier français"
-    },
-    {
-      title: "Orientation client",
-      description: "Vos objectifs et votre satisfaction sont ma priorité absolue"
-    }
-  ];
-
-  return (
-    <section id="a-propos" className="py-20 bg-muted">
+  const values = [{
+    title: "Intégrité",
+    description: "Transparence totale et honnêteté dans chaque transaction"
+  }, {
+    title: "Expertise",
+    description: "Connaissance approfondie du marché immobilier français"
+  }, {
+    title: "Orientation client",
+    description: "Vos objectifs et votre satisfaction sont ma priorité absolue"
+  }];
+  return <section id="a-propos" className="py-20 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
@@ -49,36 +41,23 @@ const AboutSection = () => {
             </div>
 
             <div className="grid sm:grid-cols-3 gap-6">
-              {values.map((value, index) => (
-                <div key={index} className="text-center">
+              {values.map((value, index) => <div key={index} className="text-center">
                   <h3 className="font-semibold text-primary mb-2">{value.title}</h3>
                   <p className="text-sm text-muted-foreground">{value.description}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
           <div className="relative">
             <Card className="overflow-hidden shadow-xl">
               <CardContent className="p-0">
-                <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
-                  alt="Professionnel de l'immobilier"
-                  className="w-full h-96 object-cover"
-                />
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Professionnel de l'immobilier" className="w-full h-96 object-cover" />
               </CardContent>
             </Card>
-            <div className="absolute -bottom-6 -right-6 bg-primary text-primary-foreground p-6 rounded-xl shadow-lg">
-              <div className="text-center">
-                <div className="text-2xl font-bold">5+</div>
-                <div className="text-sm">Années d'expérience</div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutSection;
