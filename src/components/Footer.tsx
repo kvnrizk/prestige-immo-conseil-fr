@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -9,18 +10,46 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-primary-foreground">Charbel's Agency</h3>
             <p className="text-primary-foreground/80 leading-relaxed">
-              Votre agent immobilier indépendant de confiance en France. 
+              Votre agent immobilier indépendant de confiance à Paris. 
               Accompagnement personnalisé pour tous vos projets immobiliers.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Services</h4>
+            <h4 className="text-lg font-semibold">Nos Services</h4>
             <ul className="space-y-2 text-primary-foreground/80">
-              <li>Achat immobilier</li>
-              <li>Vente immobilière</li>
-              <li>Location longue durée</li>
-              <li>Location saisonnière Airbnb</li>
+              <li>
+                <Link 
+                  to="/buying" 
+                  className="hover:text-primary-foreground transition-colors cursor-pointer"
+                >
+                  Achat immobilier
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/buying" 
+                  className="hover:text-primary-foreground transition-colors cursor-pointer"
+                >
+                  Vente immobilière
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/renting" 
+                  className="hover:text-primary-foreground transition-colors cursor-pointer"
+                >
+                  Location longue durée
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/short-term" 
+                  className="hover:text-primary-foreground transition-colors cursor-pointer"
+                >
+                  Location saisonnière
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -29,7 +58,7 @@ const Footer = () => {
             <div className="space-y-2 text-primary-foreground/80">
               <p>📞 +33 6 12 34 56 78</p>
               <p>✉️ contact@charbelsagency.fr</p>
-              <p>📍 Lyon et métropole</p>
+              <p>📍 Paris et Île-de-France</p>
             </div>
           </div>
         </div>

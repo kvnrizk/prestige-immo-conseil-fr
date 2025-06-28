@@ -40,6 +40,12 @@ const Navigation = () => {
               >
                 Saisonnière
               </Link>
+              <Link
+                to="/contact"
+                className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
+              >
+                Contact
+              </Link>
             </div>
           </div>
 
@@ -78,6 +84,13 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Saisonnière
+              </Link>
+              <Link
+                to="/contact"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
               </Link>
             </div>
           </div>

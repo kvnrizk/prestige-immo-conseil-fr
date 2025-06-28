@@ -10,6 +10,7 @@ import AllProperties from "./pages/AllProperties";
 import BuyingPage from "./pages/BuyingPage";
 import RentingPage from "./pages/RentingPage";
 import ShortTermPage from "./pages/ShortTermPage";
+import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/buying" element={<BuyingPage />} />
           <Route path="/renting" element={<RentingPage />} />
           <Route path="/short-term" element={<ShortTermPage />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
