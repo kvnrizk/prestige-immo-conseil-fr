@@ -1,16 +1,20 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Bed, Square, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 const PropertyDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState<Date>();
 
   // Sample property data - in a real app this would come from an API
   const properties = [
@@ -64,15 +68,70 @@ const PropertyDetails = () => {
         "https://images.unsplash.com/photo-1564540574859-0dfb63293365?auto=format&fit=crop&w=800&q=80"
       ],
       features: ["Wifi haut débit", "Ascenseur", "Kitchenette", "3ème étage", "Centre-ville", "Meublé"]
+    },
+    {
+      id: 4,
+      title: "Loft industriel",
+      price: "520 000 €",
+      location: "Lyon 7ème",
+      type: "vente" as const,
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80",
+      description: "Loft unique de 150m² avec vue exceptionnelle, dans un quartier en pleine expansion.",
+      bedrooms: 2,
+      area: 150,
+      images: [
+        "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80"
+      ],
+      features: ["Vue exceptionnelle", "Loft industriel", "Quartier en expansion"]
+    },
+    {
+      id: 5,
+      title: "Appartement T3 lumineux",
+      price: "950 €/mois",
+      location: "Caluire-et-Cuire",
+      type: "location" as const,
+      image: "https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&w=800&q=80",
+      description: "T3 de 70m² avec balcon et vue dégagée, dans résidence récente avec parking.",
+      bedrooms: 2,
+      area: 70,
+      images: [
+        "https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&w=800&q=80"
+      ],
+      features: ["Balcon", "Vue dégagée", "Parking", "Résidence récente"]
+    },
+    {
+      id: 6,
+      title: "Appartement de charme",
+      price: "90 €/nuit",
+      location: "Lyon 5ème",
+      type: "saisonnier" as const,
+      image: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80",
+      description: "Appartement de caractère dans le Vieux Lyon, décoré avec raffinement pour vos séjours.",
+      bedrooms: 2,
+      area: 60,
+      images: [
+        "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+      ],
+      features: ["Vieux Lyon", "Caractère authentique", "Décoration raffinée", "Centre historique"]
     }
   ];
 
   const property = properties.find(p => p.id === Number(id));
 
+  // Sample unavailable dates (in a real app, this would come from your backend)
+  const unavailableDates = [
+    new Date(2024, 6, 15), // July 15, 2024
+    new Date(2024, 6, 16), // July 16, 2024
+    new Date(2024, 6, 20), // July 20, 2024
+    new Date(2024, 6, 25), // July 25, 2024
+  ];
+
   if (!property) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+        <Navigation />
+        <div className="text-center pt-20">
           <h1 className="text-2xl font-bold mb-4">Bien non trouvé</h1>
           <Button onClick={() => navigate('/')}>Retour à l'accueil</Button>
         </div>
@@ -107,7 +166,30 @@ const PropertyDetails = () => {
   };
 
   const handleContact = () => {
-    navigate('/#contact');
+    navigate('/contact');
+  };
+
+  const handleDateSelect = (date: Date | undefined) => {
+    if (!date) return;
+    
+    // Check if the selected date is unavailable
+    const isUnavailable = unavailableDates.some(unavailableDate => 
+      unavailableDate.getTime() === date.getTime()
+    );
+    
+    if (isUnavailable) {
+      // Redirect to contact page if date is unavailable
+      navigate('/contact');
+      return;
+    }
+    
+    setSelectedDate(date);
+  };
+
+  const isDateDisabled = (date: Date) => {
+    return unavailableDates.some(unavailableDate => 
+      unavailableDate.getTime() === date.getTime()
+    );
   };
 
   return (
@@ -205,6 +287,43 @@ const PropertyDetails = () => {
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Availability Calendar for seasonal rentals */}
+              {property.type === 'saisonnier' && (
+                <div>
+                  <h2 className="text-xl font-semibold mb-3 flex items-center">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Disponibilités
+                  </h2>
+                  <Card>
+                    <CardContent className="p-4">
+                      <CalendarComponent
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={handleDateSelect}
+                        disabled={isDateDisabled}
+                        className="rounded-md"
+                      />
+                      {selectedDate && (
+                        <div className="mt-4 p-3 bg-primary/10 rounded-lg">
+                          <p className="text-sm text-primary font-medium">
+                            Date sélectionnée: {format(selectedDate, 'dd MMMM yyyy', { locale: fr })}
+                          </p>
+                          <Button 
+                            onClick={handleContact}
+                            className="mt-2 w-full"
+                          >
+                            Réserver cette date
+                          </Button>
+                        </div>
+                      )}
+                      <p className="text-xs text-muted-foreground mt-2">
+                        * Les dates en gris ne sont pas disponibles. Cliquez dessus pour nous contacter.
+                      </p>
+                    </CardContent>
+                  </Card>
                 </div>
               )}
 

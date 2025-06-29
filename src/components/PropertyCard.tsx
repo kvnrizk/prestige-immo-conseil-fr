@@ -58,10 +58,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
   const handleContact = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate('/contact');
   };
 
   const handleViewDetails = () => {
