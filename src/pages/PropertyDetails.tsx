@@ -106,14 +106,15 @@ const PropertyDetails = () => {
       location: "Lyon 5ème",
       type: "saisonnier" as const,
       image: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80",
-      description: "Appartement de caractère dans le Vieux Lyon, décoré avec raffinement pour vos séjours.",
+      description: "Appartement de caractère dans le Vieux Lyon, décoré avec raffinement pour vos séjours. Ce bien de 60m² offre un cadre authentique avec ses pierres apparentes et ses poutres en bois. Il comprend une chambre spacieuse, un salon confortable, une cuisine équipée et une salle de bain moderne. Situé au cœur du quartier historique, à proximité des traboules et des restaurants typiques.",
       bedrooms: 2,
       area: 60,
       images: [
         "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=800&q=80"
       ],
-      features: ["Vieux Lyon", "Caractère authentique", "Décoration raffinée", "Centre historique"]
+      features: ["Vieux Lyon", "Caractère authentique", "Décoration raffinée", "Centre historique", "Pierres apparentes", "Poutres en bois"]
     }
   ];
 
@@ -121,10 +122,13 @@ const PropertyDetails = () => {
 
   // Sample unavailable dates (in a real app, this would come from your backend)
   const unavailableDates = [
-    new Date(2024, 6, 15), // July 15, 2024
-    new Date(2024, 6, 16), // July 16, 2024
-    new Date(2024, 6, 20), // July 20, 2024
-    new Date(2024, 6, 25), // July 25, 2024
+    new Date(2024, 11, 15), // December 15, 2024
+    new Date(2024, 11, 16), // December 16, 2024
+    new Date(2024, 11, 20), // December 20, 2024
+    new Date(2024, 11, 25), // December 25, 2024
+    new Date(2025, 0, 1),   // January 1, 2025
+    new Date(2025, 0, 10),  // January 10, 2025
+    new Date(2025, 0, 15),  // January 15, 2025
   ];
 
   if (!property) {
@@ -304,6 +308,7 @@ const PropertyDetails = () => {
                         selected={selectedDate}
                         onSelect={handleDateSelect}
                         disabled={isDateDisabled}
+                        numberOfMonths={2}
                         className="rounded-md"
                       />
                       {selectedDate && (
