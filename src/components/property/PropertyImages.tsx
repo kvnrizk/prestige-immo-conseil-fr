@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Property } from '@/data/PropertyData';
+import ImageLightbox from './ImageLightbox';
 
 interface PropertyImagesProps {
   property: Property;
@@ -14,13 +15,25 @@ const PropertyImages: React.FC<PropertyImagesProps> = ({
   getTypeColor, 
   getTypeLabel 
 }) => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  // Combine main image with additional images
+  const allImages = property.images || [property.image];
+
+  const openLightbox = (index: number) => {
+    setSelectedImageIndex(index);
+    setLightboxOpen(true);
+  };
+
   return (
     <div className="space-y-4">
       <div className="relative">
         <img
           src={property.image}
           alt={property.title}
-          className="w-full h-96 object-cover rounded-lg"
+          className="w-full h-96 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+          onClick={() => openLightbox(0)}
         />
         <Badge className={`absolute top-4 left-4 ${getTypeColor(property.type)}`}>
           {getTypeLabel(property.type)}
@@ -34,11 +47,20 @@ const PropertyImages: React.FC<PropertyImagesProps> = ({
               key={index}
               src={img}
               alt={`${property.title} - ${index + 2}`}
-              className="w-full h-32 object-cover rounded-lg"
+              className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+              onClick={() => openLightbox(index + 1)}
             />
           ))}
         </div>
       )}
+
+      <ImageLightbox
+        images={allImages}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        initialIndex={selectedImageIndex}
+        propertyTitle={property.title}
+      />
     </div>
   );
 };
