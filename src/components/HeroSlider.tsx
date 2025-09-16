@@ -87,7 +87,7 @@ const HeroSlider = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-screen w-full overflow-hidden -mt-16"
     >
       <Carousel 
         setApi={setApi}
