@@ -10,7 +10,7 @@ const Navigation = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-[60] shadow-sm border-b">
+    <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
@@ -63,7 +63,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t z-[60]">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t">
               <Link
                 to="/buying"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
