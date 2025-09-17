@@ -11,7 +11,7 @@ const AboutSection = () => {
     title: "Orientation client",
     description: "Vos objectifs et votre satisfaction sont ma priorité absolue"
   }];
-  return <section id="a-propos" className="py-20 bg-muted">
+  return <section id="a-propos" className="py-20 mt-16 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
