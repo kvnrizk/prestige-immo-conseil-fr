@@ -82,7 +82,7 @@ const HeroSlider = () => {
                   <Button 
                     variant="outline" 
                     onClick={() => document.getElementById('biens')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg font-medium transition-all"
+                    className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black px-8 py-4 text-lg font-medium transition-all backdrop-blur-sm"
                   >
                     Découvrir nos biens
                   </Button>
