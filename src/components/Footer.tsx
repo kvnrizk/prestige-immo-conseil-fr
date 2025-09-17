@@ -56,9 +56,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Contact</h4>
             <div className="space-y-2 text-primary-foreground/80">
-              <p>📞 +33 6 12 34 56 78</p>
-              <p>✉️ contact@charbelsagency.fr</p>
-              <p>📍 Paris et Île-de-France</p>
+              <p><span className="text-black">📞</span> +33 6 12 34 56 78</p>
+              <p><span className="text-black">✉️</span> contact@charbelsagency.fr</p>
+              <p><span className="text-black">📍</span> Paris et Île-de-France</p>
             </div>
           </div>
         </div>
