@@ -4,12 +4,24 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     nom: '',
     email: '',
+    telephone: '',
+    typeProjet: '',
+    typeBien: '',
+    nombrePieces: '',
+    surfaceMin: '',
+    surfaceMax: '',
+    budgetMin: '',
+    budgetMax: '',
+    localisation: '',
+    delai: '',
     message: ''
   });
   const { toast } = useToast();
@@ -22,11 +34,18 @@ const ContactSection = () => {
     }));
   };
 
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validation simple
-    if (!formData.nom || !formData.email || !formData.message) {
+    if (!formData.nom || !formData.email || !formData.typeProjet) {
       toast({
         title: "Erreur",
         description: "Veuillez remplir tous les champs obligatoires.",
@@ -39,14 +58,24 @@ const ContactSection = () => {
     console.log('Données du formulaire:', formData);
     
     toast({
-      title: "Message envoyé !",
-      description: "Merci pour votre message. Je vous répondrai dans les plus brefs délais.",
+      title: "Demande envoyée !",
+      description: "Merci pour votre demande. Je vous recontacterai rapidement pour discuter de votre projet.",
     });
 
     // Reset du formulaire
     setFormData({
       nom: '',
       email: '',
+      telephone: '',
+      typeProjet: '',
+      typeBien: '',
+      nombrePieces: '',
+      surfaceMin: '',
+      surfaceMax: '',
+      budgetMin: '',
+      budgetMax: '',
+      localisation: '',
+      delai: '',
       message: ''
     });
   };
@@ -68,26 +97,35 @@ const ContactSection = () => {
           <Card className="shadow-xl">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="nom" className="block text-sm font-medium text-foreground mb-2">
-                    Nom complet *
-                  </label>
-                  <Input
-                    id="nom"
-                    name="nom"
-                    type="text"
-                    value={formData.nom}
-                    onChange={handleInputChange}
-                    placeholder="Votre nom et prénom"
-                    className="w-full"
-                    required
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="nom">Nom complet *</Label>
+                    <Input
+                      id="nom"
+                      name="nom"
+                      type="text"
+                      value={formData.nom}
+                      onChange={handleInputChange}
+                      placeholder="Votre nom et prénom"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="telephone">Téléphone</Label>
+                    <Input
+                      id="telephone"
+                      name="telephone"
+                      type="tel"
+                      value={formData.telephone}
+                      onChange={handleInputChange}
+                      placeholder="06 12 34 56 78"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email *
-                  </label>
+                  <Label htmlFor="email">Email *</Label>
                   <Input
                     id="email"
                     name="email"
@@ -95,24 +133,154 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="votre.email@exemple.com"
-                    className="w-full"
                     required
                   />
                 </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Type de projet *</Label>
+                    <Select value={formData.typeProjet} onValueChange={(value) => handleSelectChange('typeProjet', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Sélectionnez..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="achat">Achat</SelectItem>
+                        <SelectItem value="vente">Vente</SelectItem>
+                        <SelectItem value="location">Location</SelectItem>
+                        <SelectItem value="investissement">Investissement</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label>Type de bien</Label>
+                    <Select value={formData.typeBien} onValueChange={(value) => handleSelectChange('typeBien', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Sélectionnez..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="appartement">Appartement</SelectItem>
+                        <SelectItem value="maison">Maison</SelectItem>
+                        <SelectItem value="studio">Studio</SelectItem>
+                        <SelectItem value="duplex">Duplex</SelectItem>
+                        <SelectItem value="loft">Loft</SelectItem>
+                        <SelectItem value="terrain">Terrain</SelectItem>
+                        <SelectItem value="commercial">Local commercial</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <Label>Nombre de pièces</Label>
+                    <Select value={formData.nombrePieces} onValueChange={(value) => handleSelectChange('nombrePieces', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Nb pièces" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1">1 pièce</SelectItem>
+                        <SelectItem value="2">2 pièces</SelectItem>
+                        <SelectItem value="3">3 pièces</SelectItem>
+                        <SelectItem value="4">4 pièces</SelectItem>
+                        <SelectItem value="5">5 pièces</SelectItem>
+                        <SelectItem value="6+">6+ pièces</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="surfaceMin">Surface min (m²)</Label>
+                    <Input
+                      id="surfaceMin"
+                      name="surfaceMin"
+                      type="number"
+                      value={formData.surfaceMin}
+                      onChange={handleInputChange}
+                      placeholder="ex: 50"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="surfaceMax">Surface max (m²)</Label>
+                    <Input
+                      id="surfaceMax"
+                      name="surfaceMax"
+                      type="number"
+                      value={formData.surfaceMax}
+                      onChange={handleInputChange}
+                      placeholder="ex: 100"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="budgetMin">Budget min (€)</Label>
+                    <Input
+                      id="budgetMin"
+                      name="budgetMin"
+                      type="number"
+                      value={formData.budgetMin}
+                      onChange={handleInputChange}
+                      placeholder="ex: 200000"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="budgetMax">Budget max (€)</Label>
+                    <Input
+                      id="budgetMax"
+                      name="budgetMax"
+                      type="number"
+                      value={formData.budgetMax}
+                      onChange={handleInputChange}
+                      placeholder="ex: 350000"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="localisation">Localisation souhaitée</Label>
+                    <Input
+                      id="localisation"
+                      name="localisation"
+                      type="text"
+                      value={formData.localisation}
+                      onChange={handleInputChange}
+                      placeholder="ex: Paris 15ème, Lyon centre..."
+                    />
+                  </div>
+
+                  <div>
+                    <Label>Délai souhaité</Label>
+                    <Select value={formData.delai} onValueChange={(value) => handleSelectChange('delai', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Sélectionnez..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="urgent">Urgent (&lt; 1 mois)</SelectItem>
+                        <SelectItem value="court">Court terme (1-3 mois)</SelectItem>
+                        <SelectItem value="moyen">Moyen terme (3-6 mois)</SelectItem>
+                        <SelectItem value="long">Long terme (6+ mois)</SelectItem>
+                        <SelectItem value="flexible">Flexible</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Message *
-                  </label>
+                  <Label htmlFor="message">Message complémentaire</Label>
                   <Textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Décrivez votre projet immobilier ou posez vos questions..."
-                    rows={6}
-                    className="w-full resize-none"
-                    required
+                    placeholder="Décrivez vos critères spécifiques, vos attentes ou toute information complémentaire..."
+                    rows={4}
+                    className="resize-none"
                   />
                 </div>
 
@@ -120,7 +288,7 @@ const ContactSection = () => {
                   type="submit"
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-medium"
                 >
-                  Envoyer le message
+                  Envoyer ma demande
                 </Button>
               </form>
             </CardContent>
@@ -149,7 +317,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-foreground">Email</h4>
-                    <p className="text-muted-foreground">contact@charbelsagency.fr</p>
+                    <p className="text-muted-foreground">contact@clesdeparis.fr</p>
                     <p className="text-sm text-muted-foreground">Réponse sous 24h garantie</p>
                   </div>
                 </div>
