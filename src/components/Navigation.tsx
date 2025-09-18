@@ -36,7 +36,7 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link to="/" className="text-2xl font-bold text-foreground hover:text-muted-foreground transition-colors">
-              Charbel's Agency
+              Clés de Paris
             </Link>
           </div>
           
