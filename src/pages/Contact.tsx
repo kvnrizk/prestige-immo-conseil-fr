@@ -113,7 +113,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="nom">Nom complet *</Label>
+                      <Label htmlFor="nom" className="text-sm font-semibold text-foreground mb-2">Nom complet *</Label>
                       <Input 
                         id="nom" 
                         name="nom" 
@@ -121,12 +121,12 @@ const Contact = () => {
                         value={formData.nom} 
                         onChange={handleInputChange} 
                         placeholder="Votre nom et prénom" 
-                        className="h-12" 
+                        className="h-12 text-base" 
                         required 
                       />
                     </div>
                     <div>
-                      <Label htmlFor="telephone">Téléphone</Label>
+                      <Label htmlFor="telephone" className="text-sm font-semibold text-foreground mb-2">Téléphone</Label>
                       <Input 
                         id="telephone" 
                         name="telephone" 
@@ -134,13 +134,13 @@ const Contact = () => {
                         value={formData.telephone} 
                         onChange={handleInputChange} 
                         placeholder="06 12 34 56 78" 
-                        className="h-12" 
+                        className="h-12 text-base" 
                       />
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email" className="text-sm font-semibold text-foreground mb-2">Email *</Label>
                     <Input 
                       id="email" 
                       name="email" 
@@ -148,16 +148,16 @@ const Contact = () => {
                       value={formData.email} 
                       onChange={handleInputChange} 
                       placeholder="votre.email@exemple.com" 
-                      className="h-12" 
+                      className="h-12 text-base" 
                       required 
                     />
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label>Type de projet *</Label>
+                      <Label className="text-sm font-semibold text-foreground mb-2">Type de projet *</Label>
                       <Select value={formData.typeProjet} onValueChange={(value) => handleSelectChange('typeProjet', value)}>
-                        <SelectTrigger className="h-12">
+                        <SelectTrigger className="h-12 text-base">
                           <SelectValue placeholder="Sélectionnez..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -170,9 +170,9 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label>Type de bien</Label>
+                      <Label className="text-sm font-semibold text-foreground mb-2">Type de bien</Label>
                       <Select value={formData.typeBien} onValueChange={(value) => handleSelectChange('typeBien', value)}>
-                        <SelectTrigger className="h-12">
+                        <SelectTrigger className="h-12 text-base">
                           <SelectValue placeholder="Sélectionnez..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -190,9 +190,9 @@ const Contact = () => {
 
                   <div className="grid md:grid-cols-3 gap-4">
                     <div>
-                      <Label>Nombre de pièces</Label>
+                      <Label className="text-sm font-semibold text-foreground mb-2">Nombre de pièces</Label>
                       <Select value={formData.nombrePieces} onValueChange={(value) => handleSelectChange('nombrePieces', value)}>
-                        <SelectTrigger className="h-12">
+                        <SelectTrigger className="h-12 text-base">
                           <SelectValue placeholder="Nb pièces" />
                         </SelectTrigger>
                         <SelectContent>
@@ -207,7 +207,7 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="surfaceMin">Surface min (m²)</Label>
+                      <Label htmlFor="surfaceMin" className="text-sm font-semibold text-foreground mb-2">Surface min (m²)</Label>
                       <Input
                         id="surfaceMin"
                         name="surfaceMin"
@@ -215,12 +215,12 @@ const Contact = () => {
                         value={formData.surfaceMin}
                         onChange={handleInputChange}
                         placeholder="ex: 50"
-                        className="h-12"
+                        className="h-12 text-base"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="surfaceMax">Surface max (m²)</Label>
+                      <Label htmlFor="surfaceMax" className="text-sm font-semibold text-foreground mb-2">Surface max (m²)</Label>
                       <Input
                         id="surfaceMax"
                         name="surfaceMax"
@@ -228,14 +228,14 @@ const Contact = () => {
                         value={formData.surfaceMax}
                         onChange={handleInputChange}
                         placeholder="ex: 100"
-                        className="h-12"
+                        className="h-12 text-base"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="budgetMin">Budget min (€)</Label>
+                      <Label htmlFor="budgetMin" className="text-sm font-semibold text-foreground mb-2">Budget min (€)</Label>
                       <Input
                         id="budgetMin"
                         name="budgetMin"
@@ -243,12 +243,12 @@ const Contact = () => {
                         value={formData.budgetMin}
                         onChange={handleInputChange}
                         placeholder="ex: 200000"
-                        className="h-12"
+                        className="h-12 text-base"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="budgetMax">Budget max (€)</Label>
+                      <Label htmlFor="budgetMax" className="text-sm font-semibold text-foreground mb-2">Budget max (€)</Label>
                       <Input
                         id="budgetMax"
                         name="budgetMax"
@@ -256,14 +256,14 @@ const Contact = () => {
                         value={formData.budgetMax}
                         onChange={handleInputChange}
                         placeholder="ex: 350000"
-                        className="h-12"
+                        className="h-12 text-base"
                       />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="localisation">Localisation souhaitée</Label>
+                      <Label htmlFor="localisation" className="text-sm font-semibold text-foreground mb-2">Localisation souhaitée</Label>
                       <Input
                         id="localisation"
                         name="localisation"
@@ -271,14 +271,14 @@ const Contact = () => {
                         value={formData.localisation}
                         onChange={handleInputChange}
                         placeholder="ex: Paris 15ème, Lyon centre..."
-                        className="h-12"
+                        className="h-12 text-base"
                       />
                     </div>
 
                     <div>
-                      <Label>Délai souhaité</Label>
+                      <Label className="text-sm font-semibold text-foreground mb-2">Délai souhaité</Label>
                       <Select value={formData.delai} onValueChange={(value) => handleSelectChange('delai', value)}>
-                        <SelectTrigger className="h-12">
+                        <SelectTrigger className="h-12 text-base">
                           <SelectValue placeholder="Sélectionnez..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -293,7 +293,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="message">Message complémentaire</Label>
+                    <Label htmlFor="message" className="text-sm font-semibold text-foreground mb-2">Message complémentaire</Label>
                     <Textarea 
                       id="message" 
                       name="message" 
@@ -301,7 +301,7 @@ const Contact = () => {
                       onChange={handleInputChange} 
                       placeholder="Décrivez vos critères spécifiques, vos attentes ou toute information complémentaire..." 
                       rows={4} 
-                      className="resize-none" 
+                      className="resize-none text-base" 
                     />
                   </div>
 
