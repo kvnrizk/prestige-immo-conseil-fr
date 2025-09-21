@@ -3,12 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Home, Building, KeyRound, TrendingUp } from 'lucide-react';
 const Contact = () => {
   const [formData, setFormData] = useState({
     nom: '',
@@ -153,58 +152,73 @@ const Contact = () => {
                     />
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label className="text-sm font-semibold text-foreground mb-2">Type de projet *</Label>
-                      <Select value={formData.typeProjet} onValueChange={(value) => handleSelectChange('typeProjet', value)}>
-                        <SelectTrigger className="h-12 text-base">
-                          <SelectValue placeholder="Sélectionnez..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="achat">Achat</SelectItem>
-                          <SelectItem value="vente">Vente</SelectItem>
-                          <SelectItem value="location">Location</SelectItem>
-                          <SelectItem value="investissement">Investissement</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label className="text-sm font-semibold text-foreground mb-2">Type de bien</Label>
-                      <Select value={formData.typeBien} onValueChange={(value) => handleSelectChange('typeBien', value)}>
-                        <SelectTrigger className="h-12 text-base">
-                          <SelectValue placeholder="Sélectionnez..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="appartement">Appartement</SelectItem>
-                          <SelectItem value="maison">Maison</SelectItem>
-                          <SelectItem value="studio">Studio</SelectItem>
-                          <SelectItem value="duplex">Duplex</SelectItem>
-                          <SelectItem value="loft">Loft</SelectItem>
-                          <SelectItem value="terrain">Terrain</SelectItem>
-                          <SelectItem value="commercial">Local commercial</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  <div>
+                    <Label className="text-sm font-semibold text-foreground mb-4">Type de projet *</Label>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {[
+                        { value: 'achat', label: 'Achat', icon: KeyRound },
+                        { value: 'vente', label: 'Vente', icon: TrendingUp },
+                        { value: 'location', label: 'Location', icon: Home },
+                        { value: 'investissement', label: 'Investissement', icon: Building }
+                      ].map(({ value, label, icon: Icon }) => (
+                        <Button
+                          key={value}
+                          type="button"
+                          variant={formData.typeProjet === value ? 'default' : 'outline'}
+                          onClick={() => handleSelectChange('typeProjet', value)}
+                          className="h-auto p-4 flex flex-col items-center gap-2 text-sm font-medium"
+                        >
+                          <Icon size={20} />
+                          {label}
+                        </Button>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div>
-                      <Label className="text-sm font-semibold text-foreground mb-2">Nombre de pièces</Label>
-                      <Select value={formData.nombrePieces} onValueChange={(value) => handleSelectChange('nombrePieces', value)}>
-                        <SelectTrigger className="h-12 text-base">
-                          <SelectValue placeholder="Nb pièces" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1 pièce</SelectItem>
-                          <SelectItem value="2">2 pièces</SelectItem>
-                          <SelectItem value="3">3 pièces</SelectItem>
-                          <SelectItem value="4">4 pièces</SelectItem>
-                          <SelectItem value="5">5 pièces</SelectItem>
-                          <SelectItem value="6+">6+ pièces</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  <div>
+                    <Label className="text-sm font-semibold text-foreground mb-4">Type de bien</Label>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {[
+                        { value: 'appartement', label: 'Appartement' },
+                        { value: 'maison', label: 'Maison' },
+                        { value: 'studio', label: 'Studio' },
+                        { value: 'duplex', label: 'Duplex' },
+                        { value: 'loft', label: 'Loft' },
+                        { value: 'terrain', label: 'Terrain' },
+                        { value: 'commercial', label: 'Commercial' }
+                      ].map(({ value, label }) => (
+                        <Button
+                          key={value}
+                          type="button"
+                          variant={formData.typeBien === value ? 'default' : 'outline'}
+                          onClick={() => handleSelectChange('typeBien', value)}
+                          className="h-12 text-sm font-medium"
+                        >
+                          {label}
+                        </Button>
+                      ))}
                     </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <Label className="text-sm font-semibold text-foreground mb-4">Nombre de pièces</Label>
+                      <div className="flex flex-wrap gap-3">
+                        {['1', '2', '3', '4', '5', '6+'].map((pieces) => (
+                          <Button
+                            key={pieces}
+                            type="button"
+                            variant={formData.nombrePieces === pieces ? 'default' : 'outline'}
+                            onClick={() => handleSelectChange('nombrePieces', pieces)}
+                            className="h-12 w-16 text-sm font-medium"
+                          >
+                            {pieces}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-4">
 
                     <div>
                       <Label htmlFor="surfaceMin" className="text-sm font-semibold text-foreground mb-2">Surface min (m²)</Label>
@@ -219,17 +233,18 @@ const Contact = () => {
                       />
                     </div>
 
-                    <div>
-                      <Label htmlFor="surfaceMax" className="text-sm font-semibold text-foreground mb-2">Surface max (m²)</Label>
-                      <Input
-                        id="surfaceMax"
-                        name="surfaceMax"
-                        type="number"
-                        value={formData.surfaceMax}
-                        onChange={handleInputChange}
-                        placeholder="ex: 100"
-                        className="h-12 text-base"
-                      />
+                      <div>
+                        <Label htmlFor="surfaceMax" className="text-sm font-semibold text-foreground mb-2">Surface max (m²)</Label>
+                        <Input
+                          id="surfaceMax"
+                          name="surfaceMax"
+                          type="number"
+                          value={formData.surfaceMax}
+                          onChange={handleInputChange}
+                          placeholder="ex: 100"
+                          className="h-12 text-base"
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -276,19 +291,27 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label className="text-sm font-semibold text-foreground mb-2">Délai souhaité</Label>
-                      <Select value={formData.delai} onValueChange={(value) => handleSelectChange('delai', value)}>
-                        <SelectTrigger className="h-12 text-base">
-                          <SelectValue placeholder="Sélectionnez..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="urgent">Urgent (&lt; 1 mois)</SelectItem>
-                          <SelectItem value="court">Court terme (1-3 mois)</SelectItem>
-                          <SelectItem value="moyen">Moyen terme (3-6 mois)</SelectItem>
-                          <SelectItem value="long">Long terme (6+ mois)</SelectItem>
-                          <SelectItem value="flexible">Flexible</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Label className="text-sm font-semibold text-foreground mb-4">Délai souhaité</Label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'urgent', label: 'Urgent', subtitle: '< 1 mois' },
+                          { value: 'court', label: 'Court terme', subtitle: '1-3 mois' },
+                          { value: 'moyen', label: 'Moyen terme', subtitle: '3-6 mois' },
+                          { value: 'long', label: 'Long terme', subtitle: '6+ mois' },
+                          { value: 'flexible', label: 'Flexible', subtitle: 'Pas de rush' }
+                        ].map(({ value, label, subtitle }) => (
+                          <Button
+                            key={value}
+                            type="button"
+                            variant={formData.delai === value ? 'default' : 'outline'}
+                            onClick={() => handleSelectChange('delai', value)}
+                            className="h-auto p-4 flex flex-col items-start text-left"
+                          >
+                            <span className="font-medium">{label}</span>
+                            <span className="text-xs opacity-70">{subtitle}</span>
+                          </Button>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
