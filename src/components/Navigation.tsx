@@ -59,7 +59,7 @@ const Navigation = () => {
                 to="/short-term"
                 className="text-foreground hover:text-muted-foreground px-3 py-2 text-sm font-medium transition-colors"
               >
-                Saisonnière
+                Court durée
               </Link>
               <Link
                 to="/contact"
@@ -104,7 +104,7 @@ const Navigation = () => {
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-muted-foreground transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Saisonnière
+                Court durée
               </Link>
               <Link
                 to="/contact"
