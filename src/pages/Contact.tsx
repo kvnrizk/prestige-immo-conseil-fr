@@ -4,6 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -16,10 +18,8 @@ const Contact = () => {
     typeProjet: '',
     typeBien: '',
     nombrePieces: '',
-    surfaceMin: '',
-    surfaceMax: '',
-    budgetMin: '',
-    budgetMax: '',
+    surfaceRange: [50, 150] as [number, number],
+    budgetRange: [150000, 500000] as [number, number],
     localisation: '',
     delai: '',
     message: ''
@@ -38,6 +38,13 @@ const Contact = () => {
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handleRangeChange = (name: string, value: number[]) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value as [number, number]
     }));
   };
 
@@ -67,10 +74,8 @@ const Contact = () => {
       typeProjet: '',
       typeBien: '',
       nombrePieces: '',
-      surfaceMin: '',
-      surfaceMax: '',
-      budgetMin: '',
-      budgetMax: '',
+      surfaceRange: [50, 150],
+      budgetRange: [150000, 500000],
       localisation: '',
       delai: '',
       message: ''
@@ -218,61 +223,40 @@ const Contact = () => {
                       </div>
                     </div>
                     
-                    <div className="grid md:grid-cols-2 gap-4">
-
                     <div>
-                      <Label htmlFor="surfaceMin" className="text-sm font-semibold text-foreground mb-2">Surface min (m²)</Label>
-                      <Input
-                        id="surfaceMin"
-                        name="surfaceMin"
-                        type="number"
-                        value={formData.surfaceMin}
-                        onChange={handleInputChange}
-                        placeholder="ex: 50"
-                        className="h-12 text-base"
-                      />
-                    </div>
-
-                      <div>
-                        <Label htmlFor="surfaceMax" className="text-sm font-semibold text-foreground mb-2">Surface max (m²)</Label>
-                        <Input
-                          id="surfaceMax"
-                          name="surfaceMax"
-                          type="number"
-                          value={formData.surfaceMax}
-                          onChange={handleInputChange}
-                          placeholder="ex: 100"
-                          className="h-12 text-base"
+                      <Label className="text-sm font-semibold text-foreground mb-4">Surface souhaitée (m²)</Label>
+                      <div className="px-4">
+                        <Slider
+                          value={formData.surfaceRange}
+                          onValueChange={(value) => handleRangeChange('surfaceRange', value)}
+                          max={300}
+                          min={20}
+                          step={5}
+                          className="w-full"
                         />
+                        <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                          <span>{formData.surfaceRange[0]} m²</span>
+                          <span>{formData.surfaceRange[1]} m²</span>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="budgetMin" className="text-sm font-semibold text-foreground mb-2">Budget min (€)</Label>
-                      <Input
-                        id="budgetMin"
-                        name="budgetMin"
-                        type="number"
-                        value={formData.budgetMin}
-                        onChange={handleInputChange}
-                        placeholder="ex: 200000"
-                        className="h-12 text-base"
+                  <div>
+                    <Label className="text-sm font-semibold text-foreground mb-4">Budget souhaité (€)</Label>
+                    <div className="px-4">
+                      <Slider
+                        value={formData.budgetRange}
+                        onValueChange={(value) => handleRangeChange('budgetRange', value)}
+                        max={1000000}
+                        min={50000}
+                        step={10000}
+                        className="w-full"
                       />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="budgetMax" className="text-sm font-semibold text-foreground mb-2">Budget max (€)</Label>
-                      <Input
-                        id="budgetMax"
-                        name="budgetMax"
-                        type="number"
-                        value={formData.budgetMax}
-                        onChange={handleInputChange}
-                        placeholder="ex: 350000"
-                        className="h-12 text-base"
-                      />
+                      <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                        <span>{formData.budgetRange[0].toLocaleString('fr-FR')} €</span>
+                        <span>{formData.budgetRange[1].toLocaleString('fr-FR')} €</span>
+                      </div>
                     </div>
                   </div>
 
@@ -291,27 +275,19 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label className="text-sm font-semibold text-foreground mb-4">Délai souhaité</Label>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'urgent', label: 'Urgent', subtitle: '< 1 mois' },
-                          { value: 'court', label: 'Court terme', subtitle: '1-3 mois' },
-                          { value: 'moyen', label: 'Moyen terme', subtitle: '3-6 mois' },
-                          { value: 'long', label: 'Long terme', subtitle: '6+ mois' },
-                          { value: 'flexible', label: 'Flexible', subtitle: 'Pas de rush' }
-                        ].map(({ value, label, subtitle }) => (
-                          <Button
-                            key={value}
-                            type="button"
-                            variant={formData.delai === value ? 'default' : 'outline'}
-                            onClick={() => handleSelectChange('delai', value)}
-                            className="h-auto p-4 flex flex-col items-start text-left"
-                          >
-                            <span className="font-medium">{label}</span>
-                            <span className="text-xs opacity-70">{subtitle}</span>
-                          </Button>
-                        ))}
-                      </div>
+                      <Label className="text-sm font-semibold text-foreground mb-2">Délai souhaité</Label>
+                      <Select value={formData.delai} onValueChange={(value) => handleSelectChange('delai', value)}>
+                        <SelectTrigger className="h-12 text-base bg-background border border-input">
+                          <SelectValue placeholder="Sélectionnez votre délai..." />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background border border-input z-50">
+                          <SelectItem value="urgent">Urgent (&lt; 1 mois)</SelectItem>
+                          <SelectItem value="court">Court terme (1-3 mois)</SelectItem>
+                          <SelectItem value="moyen">Moyen terme (3-6 mois)</SelectItem>
+                          <SelectItem value="long">Long terme (6+ mois)</SelectItem>
+                          <SelectItem value="flexible">Flexible</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 
