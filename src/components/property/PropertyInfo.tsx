@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Bed, Square } from 'lucide-react';
+import { MapPin, Bed, Square, Bath, Trees, Car, Wifi, Utensils } from 'lucide-react';
 import { Property } from '@/data/PropertyData';
 
 interface PropertyInfoProps {
@@ -8,6 +8,57 @@ interface PropertyInfoProps {
 }
 
 const PropertyInfo: React.FC<PropertyInfoProps> = ({ property }) => {
+  // Helper function to get additional property details based on property type and features
+  const getAdditionalDetails = () => {
+    const details = [];
+    
+    // Add bathroom info (assume 1 for studio, bedrooms count for larger properties)
+    const bathrooms = property.bedrooms === 1 ? 1 : Math.min(property.bedrooms || 1, 2);
+    details.push({
+      icon: Bath,
+      text: `${bathrooms} salle${bathrooms > 1 ? 's' : ''} de bain`,
+      key: 'bathroom'
+    });
+
+    // Check features for specific amenities
+    if (property.features) {
+      if (property.features.some(f => f.toLowerCase().includes('balcon'))) {
+        details.push({
+          icon: Trees,
+          text: 'Balcon',
+          key: 'balcon'
+        });
+      }
+      
+      if (property.features.some(f => f.toLowerCase().includes('garage') || f.toLowerCase().includes('parking'))) {
+        details.push({
+          icon: Car,
+          text: 'Parking',
+          key: 'parking'
+        });
+      }
+      
+      if (property.features.some(f => f.toLowerCase().includes('wifi'))) {
+        details.push({
+          icon: Wifi,
+          text: 'Wifi',
+          key: 'wifi'
+        });
+      }
+      
+      if (property.features.some(f => f.toLowerCase().includes('cuisine'))) {
+        details.push({
+          icon: Utensils,
+          text: 'Cuisine équipée',
+          key: 'cuisine'
+        });
+      }
+    }
+    
+    return details;
+  };
+
+  const additionalDetails = getAdditionalDetails();
   return (
     <div className="space-y-6">
       <div>
@@ -24,7 +75,7 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({ property }) => {
       </div>
 
       {/* Property Info */}
-      <div className="flex gap-6 text-sm text-muted-foreground">
+      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
         {property.bedrooms && (
           <div className="flex items-center">
             <Bed className="w-4 h-4 mr-2" />
@@ -37,6 +88,12 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({ property }) => {
             {property.area} m²
           </div>
         )}
+        {additionalDetails.map((detail) => (
+          <div key={detail.key} className="flex items-center">
+            <detail.icon className="w-4 h-4 mr-2" />
+            {detail.text}
+          </div>
+        ))}
       </div>
 
       {/* Description */}
