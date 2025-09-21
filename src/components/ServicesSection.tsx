@@ -20,7 +20,7 @@ const ServicesSection = () => {
       icon: "🔑"
     },
     {
-      title: "Location saisonnière",
+      title: "Location court durée",
       description: "Optimisation Airbnb : création d'annonces attractives, gestion des réservations, optimisation des revenus et service conciergerie.",
       icon: "🌟"
     }

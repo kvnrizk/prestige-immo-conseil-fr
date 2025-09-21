@@ -50,7 +50,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       case 'location':
         return 'À louer';
       case 'saisonnier':
-        return 'Location saisonnière';
+        return 'Location court durée';
       default:
         return type;
     }

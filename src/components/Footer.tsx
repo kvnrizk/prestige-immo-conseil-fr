@@ -48,7 +48,7 @@ const Footer = () => {
                   to="/short-term" 
                   className="hover:text-primary-foreground transition-colors cursor-pointer"
                 >
-                  Location saisonnière
+                  Location court durée
                 </Link>
               </li>
             </ul>

@@ -83,7 +83,7 @@ const PropertiesSection = () => {
     { key: 'tous', label: 'Tous les biens' },
     { key: 'vente', label: 'À vendre' },
     { key: 'location', label: 'À louer' },
-    { key: 'saisonnier', label: 'Location saisonnière' }
+    { key: 'saisonnier', label: 'Location court durée' }
   ];
 
   return (

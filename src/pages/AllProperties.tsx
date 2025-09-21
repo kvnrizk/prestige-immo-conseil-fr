@@ -152,7 +152,7 @@ const AllProperties = () => {
       case 'location':
         return 'À louer';
       case 'saisonnier':
-        return 'Location saisonnière';
+        return 'Location court durée';
       default:
         return 'Tous';
     }
@@ -201,7 +201,7 @@ const AllProperties = () => {
                 <SelectItem value="tous">Toutes catégories</SelectItem>
                 <SelectItem value="vente">À vendre</SelectItem>
                 <SelectItem value="location">À louer</SelectItem>
-                <SelectItem value="saisonnier">Location saisonnière</SelectItem>
+                <SelectItem value="saisonnier">Location court durée</SelectItem>
               </SelectContent>
             </Select>
 
