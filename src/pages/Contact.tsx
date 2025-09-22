@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { Phone, Mail, MapPin, Send, Home, Building, KeyRound, TrendingUp } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Home, Building, KeyRound, TrendingUp, Minus, Plus } from 'lucide-react';
 const Contact = () => {
   const [formData, setFormData] = useState({
     nom: '',
@@ -46,6 +46,48 @@ const Contact = () => {
       ...prev,
       [name]: value as [number, number]
     }));
+  };
+
+  const incrementRange = (name: string, index: 0 | 1, step: number, max: number) => {
+    setFormData(prev => {
+      const currentRange = prev[name as keyof typeof prev] as [number, number];
+      const newValue = Math.min(currentRange[index] + step, max);
+      const newRange = [...currentRange] as [number, number];
+      newRange[index] = newValue;
+      
+      // Ensure min <= max
+      if (index === 0 && newRange[0] > newRange[1]) {
+        newRange[1] = newRange[0];
+      } else if (index === 1 && newRange[1] < newRange[0]) {
+        newRange[0] = newRange[1];
+      }
+      
+      return {
+        ...prev,
+        [name]: newRange
+      };
+    });
+  };
+
+  const decrementRange = (name: string, index: 0 | 1, step: number, min: number) => {
+    setFormData(prev => {
+      const currentRange = prev[name as keyof typeof prev] as [number, number];
+      const newValue = Math.max(currentRange[index] - step, min);
+      const newRange = [...currentRange] as [number, number];
+      newRange[index] = newValue;
+      
+      // Ensure min <= max
+      if (index === 0 && newRange[0] > newRange[1]) {
+        newRange[1] = newRange[0];
+      } else if (index === 1 && newRange[1] < newRange[0]) {
+        newRange[0] = newRange[1];
+      }
+      
+      return {
+        ...prev,
+        [name]: newRange
+      };
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -225,18 +267,62 @@ const Contact = () => {
                     
                     <div>
                       <Label className="text-sm font-semibold text-foreground mb-4">Surface souhaitée (m²)</Label>
-                      <div className="px-4">
-                        <Slider
-                          value={formData.surfaceRange}
-                          onValueChange={(value) => handleRangeChange('surfaceRange', value)}
-                          max={300}
-                          min={20}
-                          step={5}
-                          className="w-full"
-                        />
-                        <div className="flex justify-between mt-2 text-sm text-muted-foreground">
-                          <span>{formData.surfaceRange[0]} m²</span>
-                          <span>{formData.surfaceRange[1]} m²</span>
+                      <div className="flex items-center gap-4">
+                        <div className="flex flex-col gap-2">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => decrementRange('surfaceRange', 0, 5, 20)}
+                            className="h-8 w-8 p-0"
+                          >
+                            <Minus size={14} />
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => incrementRange('surfaceRange', 0, 5, 300)}
+                            className="h-8 w-8 p-0"
+                          >
+                            <Plus size={14} />
+                          </Button>
+                        </div>
+                        
+                        <div className="flex-1 px-4">
+                          <Slider
+                            value={formData.surfaceRange}
+                            onValueChange={(value) => handleRangeChange('surfaceRange', value)}
+                            max={300}
+                            min={20}
+                            step={5}
+                            className="w-full"
+                          />
+                          <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                            <span>{formData.surfaceRange[0]} m²</span>
+                            <span>{formData.surfaceRange[1]} m²</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-col gap-2">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => decrementRange('surfaceRange', 1, 5, 20)}
+                            className="h-8 w-8 p-0"
+                          >
+                            <Minus size={14} />
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => incrementRange('surfaceRange', 1, 5, 300)}
+                            className="h-8 w-8 p-0"
+                          >
+                            <Plus size={14} />
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -244,18 +330,62 @@ const Contact = () => {
 
                   <div>
                     <Label className="text-sm font-semibold text-foreground mb-4">Budget souhaité (€)</Label>
-                    <div className="px-4">
-                      <Slider
-                        value={formData.budgetRange}
-                        onValueChange={(value) => handleRangeChange('budgetRange', value)}
-                        max={1000000}
-                        min={50000}
-                        step={10000}
-                        className="w-full"
-                      />
-                      <div className="flex justify-between mt-2 text-sm text-muted-foreground">
-                        <span>{formData.budgetRange[0].toLocaleString('fr-FR')} €</span>
-                        <span>{formData.budgetRange[1].toLocaleString('fr-FR')} €</span>
+                    <div className="flex items-center gap-4">
+                      <div className="flex flex-col gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => decrementRange('budgetRange', 0, 10000, 50000)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Minus size={14} />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => incrementRange('budgetRange', 0, 10000, 1000000)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Plus size={14} />
+                        </Button>
+                      </div>
+                      
+                      <div className="flex-1 px-4">
+                        <Slider
+                          value={formData.budgetRange}
+                          onValueChange={(value) => handleRangeChange('budgetRange', value)}
+                          max={1000000}
+                          min={50000}
+                          step={10000}
+                          className="w-full"
+                        />
+                        <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                          <span>{formData.budgetRange[0].toLocaleString('fr-FR')} €</span>
+                          <span>{formData.budgetRange[1].toLocaleString('fr-FR')} €</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => decrementRange('budgetRange', 1, 10000, 50000)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Minus size={14} />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => incrementRange('budgetRange', 1, 10000, 1000000)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Plus size={14} />
+                        </Button>
                       </div>
                     </div>
                   </div>
