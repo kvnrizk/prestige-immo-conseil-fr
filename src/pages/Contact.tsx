@@ -225,7 +225,7 @@ const Contact = () => {
                     
                     <div>
                       <Label className="text-sm font-semibold text-foreground mb-4">Surface souhaitée (m²)</Label>
-                      <div className="px-4">
+                      <div className="px-4 my-4">
                         <Slider
                           value={formData.surfaceRange}
                           onValueChange={(value) => handleRangeChange('surfaceRange', value)}
