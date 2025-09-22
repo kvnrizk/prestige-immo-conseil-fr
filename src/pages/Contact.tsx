@@ -115,7 +115,7 @@ const Contact = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 my-4">
                     <div>
                       <Label htmlFor="nom" className="text-sm font-semibold text-foreground mb-2">Nom complet *</Label>
                       <Input 
@@ -143,7 +143,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="my-4">
                     <Label htmlFor="email" className="text-sm font-semibold text-foreground mb-2">Email *</Label>
                     <Input 
                       id="email" 
@@ -157,7 +157,7 @@ const Contact = () => {
                     />
                   </div>
 
-                  <div>
+                  <div className="my-4">
                     <Label className="text-sm font-semibold text-foreground mb-4">Type de projet *</Label>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {[
@@ -180,7 +180,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="my-4">
                     <Label className="text-sm font-semibold text-foreground mb-4">Type de bien</Label>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {[
@@ -242,7 +242,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="my-4">
                     <Label className="text-sm font-semibold text-foreground mb-4">Budget souhaité (€)</Label>
                      <div className="px-4 my-4">
                       <Slider
@@ -260,7 +260,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 my-4">
                     <div>
                       <Label htmlFor="localisation" className="text-sm font-semibold text-foreground mb-2">Localisation souhaitée</Label>
                       <Input
@@ -291,7 +291,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="my-4">
                     <Label htmlFor="message" className="text-sm font-semibold text-foreground mb-2">Message complémentaire</Label>
                     <Textarea 
                       id="message" 
