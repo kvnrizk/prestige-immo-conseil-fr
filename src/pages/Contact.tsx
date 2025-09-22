@@ -244,7 +244,7 @@ const Contact = () => {
 
                   <div>
                     <Label className="text-sm font-semibold text-foreground mb-4">Budget souhaité (€)</Label>
-                    <div className="px-4">
+                     <div className="px-4 my-4">
                       <Slider
                         value={formData.budgetRange}
                         onValueChange={(value) => handleRangeChange('budgetRange', value)}
