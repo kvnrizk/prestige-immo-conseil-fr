@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import ScrollReveal from './ScrollReveal';
 const AboutSection = () => {
   const values = [{
     title: "Intégrité",
@@ -14,7 +15,7 @@ const AboutSection = () => {
   return <section id="a-propos" className="py-20 mt-16 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
+          <ScrollReveal animation="fade-in-left" className="space-y-8">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
                 Votre partenaire immobilier de confiance
@@ -26,22 +27,22 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-6">
+            <ScrollReveal delay={300} className="grid sm:grid-cols-3 gap-6">
               {values.map((value, index) => <div key={index} className="text-center">
                   <h3 className="font-semibold text-primary mb-2">{value.title}</h3>
                   <p className="text-sm text-muted-foreground">{value.description}</p>
                 </div>)}
-            </div>
-          </div>
+            </ScrollReveal>
+          </ScrollReveal>
 
-          <div className="relative">
+          <ScrollReveal animation="fade-in-right" delay={200} className="relative">
             <Card className="overflow-hidden shadow-xl">
               <CardContent className="p-0">
                 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Professionnel de l'immobilier" className="w-full h-96 object-cover" />
               </CardContent>
             </Card>
             
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>;

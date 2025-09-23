@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropertyCard from './PropertyCard';
 import { Button } from '@/components/ui/button';
+import ScrollReveal from './ScrollReveal';
 
 const PropertiesSection = () => {
   const [activeFilter, setActiveFilter] = useState('tous');
@@ -89,7 +90,7 @@ const PropertiesSection = () => {
   return (
     <section id="biens" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             Découvrez nos biens immobiliers
           </h2>
@@ -97,9 +98,9 @@ const PropertiesSection = () => {
             Une sélection de biens de qualité, rigoureusement choisis pour répondre 
             à tous vos besoins immobiliers.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <ScrollReveal delay={200} className="flex flex-wrap justify-center gap-4 mb-12">
           {filters.map((filter) => (
             <Button
               key={filter.key}
@@ -113,25 +114,26 @@ const PropertiesSection = () => {
               {filter.label}
             </Button>
           ))}
-        </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProperties.map((property) => (
-            <PropertyCard
-              key={property.id}
-              {...property}
-            />
+          {filteredProperties.map((property, index) => (
+            <ScrollReveal key={property.id} delay={index * 100} animation="fade-in-up">
+              <PropertyCard
+                {...property}
+              />
+            </ScrollReveal>
           ))}
         </div>
 
         {filteredProperties.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Aucun bien ne correspond à ce filtre pour le moment.</p>
-          </div>
+        <ScrollReveal className="text-center py-12">
+          <p className="text-muted-foreground">Aucun bien ne correspond à ce filtre pour le moment.</p>
+        </ScrollReveal>
         )}
 
         {/* Lien vers tous les biens */}
-        <div className="text-center mt-12">
+        <ScrollReveal delay={400} className="text-center mt-12">
           <Link to="/properties">
             <Button 
               size="lg"
@@ -140,7 +142,7 @@ const PropertiesSection = () => {
               Voir tous nos biens
             </Button>
           </Link>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
