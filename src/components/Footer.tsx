@@ -5,9 +5,9 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground py-12">
+    <footer className="bg-primary text-primary-foreground py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-primary-foreground">Charbel's Agency</h3>
             <p className="text-primary-foreground/80 leading-relaxed">
@@ -58,27 +58,27 @@ const Footer = () => {
             <h4 className="text-lg font-semibold">Contact</h4>
             <div className="space-y-2 text-primary-foreground/80">
               <p className="flex items-center gap-2">
-                <Phone size={16} className="text-black" />
+                <Phone size={16} className="text-primary-foreground" />
                 +33 6 12 34 56 78
               </p>
               <p className="flex items-center gap-2">
-                <Mail size={16} className="text-black" />
+                <Mail size={16} className="text-primary-foreground" />
                 contact@charbelsagency.fr
               </p>
               <p className="flex items-center gap-2">
-                <MapPin size={16} className="text-black" />
+                <MapPin size={16} className="text-primary-foreground" />
                 Paris et Île-de-France
               </p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-primary-foreground/20 mt-8 sm:mt-12 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
             <p className="text-primary-foreground/60 text-sm">
               © 2024 Charbel's Agency. Tous droits réservés.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-4 sm:mt-0">
               <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors text-sm">
                 Mentions légales
               </a>

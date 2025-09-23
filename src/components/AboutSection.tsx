@@ -12,12 +12,12 @@ const AboutSection = () => {
     title: "Orientation client",
     description: "Vos objectifs et votre satisfaction sont ma priorité absolue"
   }];
-  return <section id="a-propos" className="py-20 mt-16 bg-muted">
+  return <section id="a-propos" className="py-12 sm:py-16 lg:py-20 mt-8 sm:mt-12 lg:mt-16 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <ScrollReveal animation="fade-in-left" className="space-y-8">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6">
                 Votre partenaire immobilier de confiance
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -27,7 +27,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <ScrollReveal delay={300} className="grid sm:grid-cols-3 gap-6">
+            <ScrollReveal delay={300} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {values.map((value, index) => <div key={index} className="text-center">
                   <h3 className="font-semibold text-primary mb-2">{value.title}</h3>
                   <p className="text-sm text-muted-foreground">{value.description}</p>

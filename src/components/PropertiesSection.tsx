@@ -88,13 +88,13 @@ const PropertiesSection = () => {
   ];
 
   return (
-    <section id="biens" className="py-20 bg-background">
+    <section id="biens" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+        <ScrollReveal className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Découvrez nos biens immobiliers
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
             Une sélection de biens de qualité, rigoureusement choisis pour répondre 
             à tous vos besoins immobiliers.
           </p>
@@ -116,7 +116,7 @@ const PropertiesSection = () => {
           ))}
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProperties.map((property, index) => (
             <ScrollReveal key={property.id} delay={index * 100} animation="fade-in-up">
               <PropertyCard

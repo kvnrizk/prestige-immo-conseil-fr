@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   const slides = [
     {
@@ -44,11 +46,11 @@ const HeroSlider = () => {
   };
 
   const scrollToContact = () => {
-    window.location.href = '/contact';
+    navigate('/contact');
   };
 
   return (
-    <section className="relative h-screen overflow-hidden pt-16">
+    <section className="relative h-screen overflow-hidden pt-16 sm:pt-20">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -65,24 +67,24 @@ const HeroSlider = () => {
             <div className="absolute inset-0 bg-black/40" />
             
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white max-w-4xl mx-auto px-4">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
+              <div className="text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in leading-tight">
                   {slide.title}
                 </h1>
-                <p className="text-xl sm:text-2xl mb-8 animate-fade-in">
+                <p className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 animate-fade-in">
                   {slide.subtitle}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in">
                   <Button 
                     onClick={scrollToContact}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-medium shadow-lg hover:shadow-xl transition-all"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                   >
                     Discutons de votre projet
                   </Button>
                   <Button 
                     variant="outline" 
                     onClick={() => document.getElementById('biens')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-black px-8 py-4 text-lg font-medium transition-all backdrop-blur-sm"
+                    className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium transition-all backdrop-blur-sm w-full sm:w-auto"
                   >
                     Découvrir nos biens
                   </Button>
@@ -96,15 +98,17 @@ const HeroSlider = () => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all backdrop-blur-sm"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all backdrop-blur-sm z-10"
+        aria-label="Image précédente"
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all backdrop-blur-sm"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all backdrop-blur-sm z-10"
+        aria-label="Image suivante"
       >
-        <ChevronRight size={24} />
+        <ChevronRight size={20} className="sm:w-6 sm:h-6" />
       </button>
 
       {/* Slide Indicators */}
