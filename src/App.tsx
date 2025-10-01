@@ -13,6 +13,7 @@ import RentingPage from "./pages/RentingPage";
 import ShortTermPage from "./pages/ShortTermPage";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
+import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/renting" element={<RentingPage />} />
           <Route path="/short-term" element={<ShortTermPage />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/dashboard" element={<Dashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

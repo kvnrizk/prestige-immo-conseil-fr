@@ -1,5 +1,6 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useProperties } from '@/contexts/PropertyContext';
+import { Property } from '@/data/PropertyData';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,91 +8,150 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Save, X } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface PropertyFormProps {
+  property?: Property | null;
   onSave: () => void;
   onCancel: () => void;
 }
 
-const PropertyForm = ({ onSave, onCancel }: PropertyFormProps) => {
+const PropertyForm = ({ property, onSave, onCancel }: PropertyFormProps) => {
+  const { addProperty, updateProperty } = useProperties();
+  const { toast } = useToast();
+
   const [formData, setFormData] = useState({
     title: '',
-    address: '',
-    type: '',
+    location: '',
+    type: 'vente' as 'vente' | 'location' | 'saisonnier',
     bedrooms: '',
     area: '',
     price: '',
     description: '',
-    amenities: ''
+    image: '',
+    features: ''
   });
+
+  useEffect(() => {
+    if (property) {
+      setFormData({
+        title: property.title,
+        location: property.location,
+        type: property.type,
+        bedrooms: property.bedrooms?.toString() || '',
+        area: property.area?.toString() || '',
+        price: property.price,
+        description: property.description,
+        image: property.image,
+        features: property.features?.join(', ') || ''
+      });
+    }
+  }, [property]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would save the property data
-    console.log('Saving property:', formData);
+
+    if (!formData.title || !formData.location || !formData.price || !formData.description) {
+      toast({ 
+        title: "Erreur", 
+        description: "Veuillez remplir tous les champs obligatoires",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const propertyData = {
+      title: formData.title,
+      location: formData.location,
+      type: formData.type,
+      bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : undefined,
+      area: formData.area ? parseInt(formData.area) : undefined,
+      price: formData.price,
+      description: formData.description,
+      image: formData.image || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80',
+      features: formData.features.split(',').map(f => f.trim()).filter(f => f)
+    };
+
+    if (property) {
+      updateProperty(property.id, propertyData);
+      toast({ title: "Propriété mise à jour", description: `${formData.title} a été modifiée avec succès` });
+    } else {
+      addProperty(propertyData);
+      toast({ title: "Propriété ajoutée", description: `${formData.title} a été ajoutée avec succès` });
+    }
+
     onSave();
   };
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card>
       <CardHeader>
-        <CardTitle>Ajouter une nouvelle propriété</CardTitle>
+        <CardTitle className="text-2xl">
+          {property ? 'Modifier la propriété' : 'Ajouter une nouvelle propriété'}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="title">Titre de la propriété *</Label>
+              <Label htmlFor="title">Titre *</Label>
               <Input
                 id="title"
                 value={formData.title}
-                onChange={(e) => handleInputChange('title', e.target.value)}
-                placeholder="Ex: Appartement Marais"
+                onChange={(e) => handleChange('title', e.target.value)}
+                placeholder="Appartement moderne centre-ville"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="type">Type de bien *</Label>
-              <Select value={formData.type} onValueChange={(value) => handleInputChange('type', value)}>
+              <Label htmlFor="location">Emplacement *</Label>
+              <Input
+                id="location"
+                value={formData.location}
+                onChange={(e) => handleChange('location', e.target.value)}
+                placeholder="Lyon 6ème"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="type">Type *</Label>
+              <Select value={formData.type} onValueChange={(value) => handleChange('type', value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Sélectionner un type" />
+                  <SelectValue placeholder="Sélectionner le type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="appartement">Appartement</SelectItem>
-                  <SelectItem value="studio">Studio</SelectItem>
-                  <SelectItem value="loft">Loft</SelectItem>
-                  <SelectItem value="maison">Maison</SelectItem>
+                  <SelectItem value="vente">Vente</SelectItem>
+                  <SelectItem value="location">Location</SelectItem>
+                  <SelectItem value="saisonnier">Saisonnier</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="address">Adresse complète *</Label>
-            <Input
-              id="address"
-              value={formData.address}
-              onChange={(e) => handleInputChange('address', e.target.value)}
-              placeholder="Ex: 15 Rue des Rosiers, 75004 Paris"
-              required
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="bedrooms">Nombre de chambres</Label>
+              <Label htmlFor="price">Prix *</Label>
+              <Input
+                id="price"
+                value={formData.price}
+                onChange={(e) => handleChange('price', e.target.value)}
+                placeholder="285 000 € ou 1 200 €/mois"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="bedrooms">Chambres</Label>
               <Input
                 id="bedrooms"
                 type="number"
                 value={formData.bedrooms}
-                onChange={(e) => handleInputChange('bedrooms', e.target.value)}
-                placeholder="2"
-                min="0"
+                onChange={(e) => handleChange('bedrooms', e.target.value)}
+                placeholder="3"
               />
             </div>
 
@@ -101,56 +161,52 @@ const PropertyForm = ({ onSave, onCancel }: PropertyFormProps) => {
                 id="area"
                 type="number"
                 value={formData.area}
-                onChange={(e) => handleInputChange('area', e.target.value)}
-                placeholder="65"
-                min="0"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="price">Prix par nuit (€) *</Label>
-              <Input
-                id="price"
-                type="number"
-                value={formData.price}
-                onChange={(e) => handleInputChange('price', e.target.value)}
-                placeholder="120"
-                min="0"
-                required
+                onChange={(e) => handleChange('area', e.target.value)}
+                placeholder="85"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="image">URL de l'image</Label>
+            <Input
+              id="image"
+              value={formData.image}
+              onChange={(e) => handleChange('image', e.target.value)}
+              placeholder="https://..."
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="description">Description *</Label>
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => handleInputChange('description', e.target.value)}
-              placeholder="Décrivez votre propriété..."
+              onChange={(e) => handleChange('description', e.target.value)}
+              placeholder="Description détaillée de la propriété..."
               rows={4}
+              required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="amenities">Équipements</Label>
-            <Textarea
-              id="amenities"
-              value={formData.amenities}
-              onChange={(e) => handleInputChange('amenities', e.target.value)}
-              placeholder="Wi-Fi, Cuisine équipée, Balcon, etc."
-              rows={3}
+            <Label htmlFor="features">Caractéristiques (séparées par des virgules)</Label>
+            <Input
+              id="features"
+              value={formData.features}
+              onChange={(e) => handleChange('features', e.target.value)}
+              placeholder="Balcon, Cave, Parking, ..."
             />
           </div>
 
-          <div className="flex justify-end space-x-4">
+          <div className="flex space-x-3 justify-end">
             <Button type="button" variant="outline" onClick={onCancel}>
               <X className="w-4 h-4 mr-2" />
               Annuler
             </Button>
             <Button type="submit">
               <Save className="w-4 h-4 mr-2" />
-              Enregistrer
+              {property ? 'Mettre à jour' : 'Enregistrer'}
             </Button>
           </div>
         </form>

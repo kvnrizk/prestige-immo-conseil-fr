@@ -6,9 +6,10 @@ import { Home, Calendar, BookOpen, Plus, BarChart3, Settings } from 'lucide-reac
 interface DashboardSidebarProps {
   activeView: string;
   onViewChange: (view: string) => void;
+  onLogout: () => void;
 }
 
-const DashboardSidebar = ({ activeView, onViewChange }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ activeView, onViewChange, onLogout }: DashboardSidebarProps) => {
   const menuItems = [
     { id: 'overview', label: 'Vue d\'ensemble', icon: Home },
     { id: 'calendar', label: 'Calendrier', icon: Calendar },
@@ -49,6 +50,14 @@ const DashboardSidebar = ({ activeView, onViewChange }: DashboardSidebarProps) =
           Gérez vos propriétés, calendriers et réservations depuis ce tableau de bord.
         </p>
       </div>
+
+      <Button
+        variant="ghost"
+        className="w-full justify-start mt-4 text-destructive hover:bg-destructive/10"
+        onClick={onLogout}
+      >
+        Déconnexion
+      </Button>
     </div>
   );
 };

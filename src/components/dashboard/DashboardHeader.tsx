@@ -5,9 +5,10 @@ import { Plus, Calendar, Home, BookOpen } from 'lucide-react';
 
 interface DashboardHeaderProps {
   activeView: string;
+  onAddNew: () => void;
 }
 
-const DashboardHeader = ({ activeView }: DashboardHeaderProps) => {
+const DashboardHeader = ({ activeView, onAddNew }: DashboardHeaderProps) => {
   const getTitle = () => {
     switch (activeView) {
       case 'overview':
@@ -49,7 +50,7 @@ const DashboardHeader = ({ activeView }: DashboardHeaderProps) => {
         <Button variant="outline">
           Exporter les données
         </Button>
-        <Button className="bg-primary hover:bg-primary/90">
+        <Button className="bg-primary hover:bg-primary/90" onClick={onAddNew}>
           <Plus className="w-4 h-4 mr-2" />
           Nouvelle propriété
         </Button>
